@@ -1,15 +1,21 @@
 # Blog-em Ipsum
 
-### A React App for the Udemy course "React Query: Server State Management for React"
+## Features
 
-## Installation
+-   Fetching data
+-   Loading and Error states
+-   React Query DevTools
+-   Pagination
+-   Prefetching
+-   Mutations
 
-Run `npm install`
+## Integration
 
-## Running the App
-
-Run `npm start`. The app will be found at [http://localhost:3000]
-
-## Server
-
-This app uses the [JSON Placeholder](https://jsonplaceholder.typicode.com/) server.
+-   npm install react-query
+-   create query client
+    -   client that manages queries and cache
+-   apply QueryProvider
+    -   provides cache and client configs to children
+    -   takes query client as a value
+-   run useQuery
+    -   hook that queries the server
