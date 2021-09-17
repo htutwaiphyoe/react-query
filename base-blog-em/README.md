@@ -38,3 +38,13 @@ react query refetches data when refoucsing the window.
 react query has devtool which is a component that shows the status of queries in the development mode. it shows queries by query key, status of queries and last updated timestamp. it also has data explorer and query explorer. by default, it is not included in production mode, no need to exclude.
 
 import devtools from react-query/devtools package and add it in the App
+
+staleTime vs cacheTime
+
+Data refetch only triggers for stale data. but there is more conditions such as component remount and window refocus. but data must be stale. staleTime is maximun age of data, how long wait the data being out of date. to add staleTime, pass third arguments in useQuery as an option. if data is fresh, react query will not trigger refetch.
+
+if staleTime is 0ms, this means data is always out of date and it needs to be refetched from the server.
+
+stateTime is for refetching.
+
+cache is for data that might be re-used later, if there is no active useQuery, data goes into cold storage and cache data expires after cacheTime (default is five mins), it shows how long it's been since the last active useQuery for a particular query, after cache expires, the data is garbage collected. cache is backup data to display while fetching, keep from having a blank page
