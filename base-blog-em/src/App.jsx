@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import { Posts } from "./Posts";
 import "./App.css";
@@ -12,6 +13,8 @@ function App() {
                 <h1>Blog Posts</h1>
                 <Posts />
             </div>
+
+            <ReactQueryDevtools />
         </QueryClientProvider>
     );
 }

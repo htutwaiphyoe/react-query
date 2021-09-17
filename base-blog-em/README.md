@@ -34,3 +34,7 @@ isError means there is an error from query function
 
 useQuery tries three times before it decides that it cannot get data
 react query refetches data when refoucsing the window.
+
+react query has devtool which is a component that shows the status of queries in the development mode. it shows queries by query key, status of queries and last updated timestamp. it also has data explorer and query explorer. by default, it is not included in production mode, no need to exclude.
+
+import devtools from react-query/devtools package and add it in the App
