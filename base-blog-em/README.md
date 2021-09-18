@@ -61,3 +61,8 @@ Array keys is Hierarchical or nested resources and Queries with additional param
 array query keys treat as dependency array. if they change, new query is created, so any value that is used in query function to fetch data should be part of query keys.
 
 if query is not in use, it becomes inactive and the data in the cache will be stayed until it is garbage collected.
+
+## Pagination
+
+track current page in component state, query keys need to include page number, update current page state when next/prev button is clicked and trigger new query, return data should include information for pagination
+
