@@ -74,3 +74,9 @@ to prefetch, use prefetchQuery which is a method of query client, to get current
 **query key must be the same shape as the one for useQuery**. because to check there is data in the cache.
 
 to keep past data in the cache, add **keepPreviousData: true** in the option object of useQuery
+
+
+isLoading means isFetching and no cache, so that will be shown only first fetching
+isFetching means fetching data no matter there is or not data in the cache, so that will be shown every fetching
+
+prefetch check data on the server whether data had updated or not while cache data is displaying, if updated, show updated data on the page, if not, it transparent to the user.
