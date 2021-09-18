@@ -22,7 +22,7 @@
 
 import QueryClient and QueryClientProvider from react-query, create new queryClient object, wrap App component with QueryClientProvider and pass queryClient object as the value of client props.
 
-import useQuery from react-query, useQuery accepts arguments, first is query key which must be unique and a function that returns promise
+import useQuery from react-query, useQuery accepts arguments, first is query key which must be unique and a function that returns promise and options object
 
 useQuery returns an object which contains a bunch of useful informations such as data, isLoading, isError, isFetching.
 
