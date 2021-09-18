@@ -66,3 +66,11 @@ if query is not in use, it becomes inactive and the data in the cache will be st
 
 track current page in component state, query keys need to include page number, update current page state when next/prev button is clicked and trigger new query, return data should include information for pagination
 
+## Prefetching
+
+in pagination, users have to wait to see data when next/prev button is click. prefetching adds data to the cache and by default data is automatically stale right away and show while refetching as long as in the cache. prefetching can be used for data which will need in the furture.
+
+to prefetch, use prefetchQuery which is a method of query client, to get current QueryClient instance, use useQueryClient hook, arguments of prefetchQuery is similar to useQuery, query keys and function, 
+**query key must be the same shape as the one for useQuery**. because to check there is data in the cache.
+
+to keep past data in the cache, add **keepPreviousData: true** in the option object of useQuery
