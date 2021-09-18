@@ -48,3 +48,16 @@ if staleTime is 0ms, this means data is always out of date and it needs to be re
 stateTime is for refetching.
 
 cache is for data that might be re-used later, if there is no active useQuery, data goes into cold storage and cache data expires after cacheTime (default is five mins), it shows how long it's been since the last active useQuery for a particular query, after cache expires, the data is garbage collected. cache is backup data to display while fetching, keep from having a blank page
+
+## Query keys
+
+every query uses the same key. data for queries with **known** keys only refetch upon triggers which are component remount, window refocus, running refetch function manually, automated refetch at a given interval, invalidation after mutations.
+
+query keys can be strings, arrays and nested objects.As long as the query key is serializable, and unique to the query's data.
+
+String keys is used for Generic List/Index resources and Non-hierarchical resources
+Array keys is Hierarchical or nested resources and Queries with additional parameters
+
+array query keys treat as dependency array. if they change, new query is created, so any value that is used in query function to fetch data should be part of query keys.
+
+if query is not in use, it becomes inactive and the data in the cache will be stayed until it is garbage collected.
