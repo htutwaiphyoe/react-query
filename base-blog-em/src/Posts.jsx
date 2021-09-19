@@ -33,11 +33,9 @@ export function Posts() {
             keepPreviousData: true,
         }
     );
+    if (isLoading) return <h1>Loading..</h1>;
 
-    if (isLoading) return <h3>Loading...</h3>;
-
-    if (isError) return <h3>Oops! Something went wrong. {error.toString()}</h3>;
-
+    if (isError) return <h1>{error.toString()}</h1>;
     return (
         <>
             <ul>

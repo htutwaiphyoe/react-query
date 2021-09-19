@@ -29,13 +29,8 @@ export function PostDetail({ post }) {
     const deleteMutation = useMutation((postId) => deletePost(postId));
 
     const updateMutation = useMutation((postId) => updatePost(postId));
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (isError) {
-        return <div>{error.toString()}</div>;
-    }
+    if (isLoading) return <h1>Loading...</h1>;
+    if (isError) return <h1>{error.toString()}</h1>;
     return (
         <>
             <h3 style={{ color: "blue" }}>{post.title}</h3>
