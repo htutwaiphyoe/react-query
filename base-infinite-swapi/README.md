@@ -30,3 +30,8 @@ hasNextPage is a boolean value which is a returned value of getNextPageParam, if
 isFetchingNextPage is status for fetching next data to show loader
 
 data from useInfiniteQuery is undefined when component is mounted, it fetch first page with default value of pageParam in query function and it stores returned data in the pages property of data object data.pages[0]. then react query runs getNextPageParam to update pageParam, then check updated pageParam for hasNextPage. if hasNextPage is true and the user takes actions to get next data, fetchNextPage function is triggered and it will run query function with updated pageParam. then the returned data is stored in the next element of data.pages array.
+
+use react-infinite-scroller to work with useInfiniteQuery, it takes props
+
+loadMore is a function to load next data (fetchNextPage)
+hasMore is a boolen to check whether there are more data to be loaded (hasNextPage)
