@@ -1,18 +1,13 @@
 # Infinite SWAPI
 
-### A project to demonstrate React Query useInfiniteQuery, for the Udemy course "React Query: Server State Management for React"
+## Features
 
-## Installation
+-   infinite scroll
 
-#. Download this directory, or clone or fork this repo
-#. `npm install --legacy-peer-deps`
+### Infinite scorll
 
-**Note** The `--legacy-peer-deps` is very important since this project uses [React Infinite Scroller](https://www.npmjs.com/package/react-infinite-scroller), which doesn't (yet) support React 17.
+infinite scroll => fetching new data just in time as the user scroll, more efficient than fetching all at once
 
-## Running the App
+two ways to implement infinite scorll: click load more button and scroll to certain point on the page
 
-Run `npm start`. The app will be found at [http://localhost:3000]
-
-## Server
-
-This app uses the [Star Wars API](https://swapi.dev/) server.
+use useInfiniteQuery hook, unlike pagination, it tracks next query which is returned as part of data
