@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 
 async function fetchComments(postId) {
     const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
@@ -26,6 +26,9 @@ export function PostDetail({ post }) {
         fetchComments(post.id)
     );
 
+    const deleteMutation = useMutation((postId) => deletePost(postId));
+
+    const updateMutation = useMutation((postId) => updatePost(postId));
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -36,7 +39,19 @@ export function PostDetail({ post }) {
     return (
         <>
             <h3 style={{ color: "blue" }}>{post.title}</h3>
-            <button>Delete</button> <button>Update title</button>
+            <button onClick={() => deleteMutation.mutate(post.id)}>Delete</button>
+            {deleteMutation.isLoading && <p style={{ color: "purple" }}>Loading...</p>}
+            {deleteMutation.isError && (
+                <p style={{ color: "red" }}>{deleteMutation.error.toString()}</p>
+            )}
+            {deleteMutation.isSuccess && <p style={{ color: "green" }}>Deleted</p>}
+            <button onClick={() => updateMutation.mutate(post.id)}>Update title</button>
+
+            {updateMutation.isLoading && <p style={{ color: "purple" }}>Loading...</p>}
+            {updateMutation.isError && (
+                <p style={{ color: "red" }}>{updateMutation.error.toString()}</p>
+            )}
+            {updateMutation.isSuccess && <p style={{ color: "green" }}>Success</p>}
             <p>{post.body}</p>
             <h4>Comments</h4>
             {data.map((comment) => (

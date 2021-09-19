@@ -80,3 +80,13 @@ isLoading means isFetching and no cache, so that will be shown only first fetchi
 isFetching means fetching data no matter there is or not data in the cache, so that will be shown every fetching
 
 prefetch check data on the server whether data had updated or not while cache data is displaying, if updated, show updated data on the page, if not, it transparent to the user.
+
+## Mutations
+
+mutation => a network call that changes data on the server
+
+to make mutation, use useMutation hook, it returns mutate function that is used to call the server with the change, it does not need query keys, there is only isLoading, by default no retries (configurable).
+
+import useMutation and pass function that makes api call  and it can take arguments. to run that, call mutate method from returned object and pass relevent arguments
+
+returned object contains isError, error, isSuccess, isLoading and so on. no destructuring might be solved naming conflict.
