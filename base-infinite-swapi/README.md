@@ -35,5 +35,6 @@ use react-infinite-scroller to work with useInfiniteQuery, it takes props
 
 loadMore is a function to load next data (fetchNextPage)
 hasMore is a boolen to check whether there are more data to be loaded (hasNextPage)
+loader is a component which renders when next page is fetching under the data
 
 bi-directional is useful when starting in the middle. for that useInfiniteQuery has fetchPreviousPage and getPreviousPageParam which works the same as next

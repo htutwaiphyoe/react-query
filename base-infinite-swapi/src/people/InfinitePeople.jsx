@@ -1,5 +1,6 @@
 import InfiniteScroll from "react-infinite-scroller";
 import { useInfiniteQuery } from "react-query";
+
 import { Person } from "./Person";
 
 const initialUrl = "https://swapi.dev/api/people/";
@@ -9,30 +10,29 @@ const fetchUrl = async (url) => {
 };
 
 export function InfinitePeople() {
-    const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useInfiniteQuery(
-        "peoples",
+    const { data, hasNextPage, fetchNextPage, isLoading, isError, error } = useInfiniteQuery(
+        "people",
         ({ pageParam = initialUrl }) => fetchUrl(pageParam),
         {
-            getNextPageParam: (lastPage) => lastPage.next,
+            getNextPageParam: (lastPage) => lastPage.next || undefined,
         }
     );
     // TODO: get data for InfiniteScroll via React Query
-    if (isLoading) return <h1>Loading...</h1>;
-    if (isError) return <h1>{error.toString()}</h1>;
-
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>{error.toString()}</div>;
     return (
         <InfiniteScroll
-            loadMore={fetchNextPage}
             hasMore={hasNextPage}
-            loader={<div key={0}>Loading...</div>}
+            loadMore={fetchNextPage}
+            loader={<div key={0}>Loading.....</div>}
         >
             {data.pages.map((pageData) =>
-                pageData.results.map((person) => (
+                pageData.results.map((p) => (
                     <Person
-                        name={person.name}
-                        hairColor={person.hairColor}
-                        eyeColor={person.eyeColor}
-                        key={person.name}
+                        name={p.name}
+                        hairColor={p.hairColor}
+                        eyeColor={p.eyeColor}
+                        key={p.name}
                     />
                 ))
             )}
