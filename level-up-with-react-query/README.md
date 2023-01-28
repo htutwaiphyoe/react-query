@@ -86,3 +86,7 @@ query key => array of unique string to track query in the cache => if query key 
 query function => function to fetch data => function that anything that returns promise
 
 useQuery returns a object with useful properties like data, isLoading, isError, refetch
+
+3. (PRACTICE) YOUR FIRST QUERY
+
+https://codesandbox.io/s/umwzlb?file=/App.js&from-sandpack=true
