@@ -90,3 +90,13 @@ useQuery returns a object with useful properties like data, isLoading, isError, 
 3. (PRACTICE) YOUR FIRST QUERY
 
 https://codesandbox.io/s/umwzlb?file=/App.js&from-sandpack=true
+
+4. Project stater template
+
+https://github.com/uidotdev/react-query-course
+
+https://react-query-issue-tracker.ui.dev/
+
+5. Setting up react query
+
+create client instance, fetch issues list and render issue item
