@@ -100,3 +100,7 @@ https://react-query-issue-tracker.ui.dev/
 5. Setting up react query
 
 create client instance, fetch issues list and render issue item
+
+6. (PRACTICE) INDEX QUERY
+
+https://codesandbox.io/s/2c7sf7?file=%2FApp.js&from-sandpack=true
