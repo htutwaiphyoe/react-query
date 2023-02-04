@@ -534,3 +534,11 @@ the problem is the way to tell react to suspense, queries can be depending queri
 react query always render twice when isFetching true and false, react query tracks property of query object and render every time property changes and cannot remove track property, to control the track of property, use notifyOnChangeProps option but it will rerender only property in notifyOnChangeProps change
 
 use select function to transform the response object and return data is query data
+
+53. (PRACTICE) Render Optimization
+
+https://codesandbox.io/s/xod1iz?file=%2FApp.js&from-sandpack=true
+
+take required properties with select callback
+
+react query takes care of optimization automatically
