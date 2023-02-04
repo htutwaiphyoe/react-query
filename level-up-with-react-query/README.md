@@ -542,3 +542,9 @@ https://codesandbox.io/s/xod1iz?file=%2FApp.js&from-sandpack=true
 take required properties with select callback
 
 react query takes care of optimization automatically
+
+54. Server side rendering with NextJS
+
+react app is bad at SEO, getSever or static => page => initial data of useQuery
+
+can server add data in the cache with serialize format. create queryClient and use prefetchQuery to store in the cache and use dehydrate function and pass client to serialize and pass state of Hydrate component
