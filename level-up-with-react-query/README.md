@@ -520,3 +520,11 @@ there is different cache between useQuery and useInfiniteQuery, use prefetchInfi
 react query also works well with GraphQL, but can be duplicate cache due to query key. use Apollo client
 
 use graphql-request with react query
+
+51. Suspense mode
+
+React query has built-in support for react suspense adding configs in useQuery, wrap component with Suspense and add {suspense: true} option in useQuery. when useQuery is loading, that sends signal to React and suspense the component will handle loading state
+
+React suspense is not responsible for error so need to wrap with ErrorBoundary, suspense option auto true to useErrorBoundary option
+
+the problem is the way to tell react to suspense, queries can be depending queries if queries are in same component
