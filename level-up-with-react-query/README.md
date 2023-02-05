@@ -514,3 +514,9 @@ use React.Fragment and give index as key for page and same query key for all pag
 
 add infinite queries for comments in issue details using InfiniteScroll component
 there is different cache between useQuery and useInfiniteQuery, use prefetchInfiniteQuery for infinite query
+
+50. React query with GraphQL
+
+react query also works well with GraphQL, but can be duplicate cache due to query key. use Apollo client
+
+use graphql-request with react query
