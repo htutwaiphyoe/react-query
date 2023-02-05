@@ -528,3 +528,9 @@ React query has built-in support for react suspense adding configs in useQuery, 
 React suspense is not responsible for error so need to wrap with ErrorBoundary, suspense option auto true to useErrorBoundary option
 
 the problem is the way to tell react to suspense, queries can be depending queries if queries are in same component
+
+52. Render optimization
+
+react query always render twice when isFetching true and false, react query tracks property of query object and render every time property changes and cannot remove track property, to control the track of property, use notifyOnChangeProps option but it will rerender only property in notifyOnChangeProps change
+
+use select function to transform the response object and return data is query data
