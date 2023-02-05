@@ -104,3 +104,11 @@ create client instance, fetch issues list and render issue item
 6. (PRACTICE) INDEX QUERY
 
 https://codesandbox.io/s/2c7sf7?file=%2FApp.js&from-sandpack=true
+
+7. (PRACTICE) QUERYING INDIVIDUAL RECORDS
+
+https://codesandbox.io/s/y3oznw?file=%2FApp.js&from-sandpack=true
+
+need to pass dependencies for each individual record in query key, react query does not fetch again if there is a cache for that query key, can pass new item in query key array
+
+https://tanstack.com/query/v3/docs/react/guides/query-keys
