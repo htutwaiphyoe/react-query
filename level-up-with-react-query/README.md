@@ -97,7 +97,7 @@ https://github.com/uidotdev/react-query-course
 
 https://react-query-issue-tracker.ui.dev/
 
-5. Setting up react query
+5. Issue list
 
 create client instance, fetch issues list and render issue item
 
@@ -112,3 +112,7 @@ https://codesandbox.io/s/y3oznw?file=%2FApp.js&from-sandpack=true
 need to pass dependencies for each individual record in query key, react query does not fetch again if there is a cache for that query key, can pass new item in query key array
 
 https://tanstack.com/query/v3/docs/react/guides/query-keys
+
+8. Querying individual user
+
+create reusable hooks for useQuery, render assignee and created by user
