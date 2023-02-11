@@ -116,3 +116,27 @@ https://tanstack.com/query/v3/docs/react/guides/query-keys
 8. Querying individual user
 
 create reusable hooks for useQuery, render assignee and created by user
+
+9. Parallel, Dependent and Deferred queries
+
+Parallel queries => combining multiple apis  
+
+1. multiple useQuery and load independently for each query and cache
+2. single useQuery with single query function with Promise.all => one query
+3. use useQueries hook for multiple queries => separate query => can have dynamic number of queries
+
+depending queries => query depend on another query
+
+1. fetch one query first and fetch depending query after that and return both data => waterfall effect
+2. fetch one query and return data, then fetch depending query and return data
+3. use two useQuery and let depending query wait while first query is loading => add extra configuration in third argument of useQuery => enabled option
+4. to know query status like disabled (isLoading is true so loading state can be long), use fetchStatus (idle(disabled or already fetch), fetching(running) and paused(offline)) and use them to control the component rendering
+
+fetchStatus => request state
+status => result of query state
+
+idle and isLoading => loading
+
+handling api calling with user actions
+
+for searching, useQuery can be called multiple times so use debounce or move to onSubmit (deferred query)
