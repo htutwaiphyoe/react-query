@@ -7,9 +7,19 @@ export function useUser(userId) {
   return userQuery;
 }
 
-export function useIssueList() {
-  const issueListQuery = useQuery(["issues"], () =>
-    fetch("/api/issues").then((res) => res.json())
-  );
+export function useIssueList(labels) {
+  const issueListQuery = useQuery(["issues", { labels }], async () => {
+    const labelQueryString = labels
+      .map((label) => `labels[]=${label}`)
+      .join("&");
+    return fetch(`/api/issues?${labelQueryString}`).then((res) => res.json());
+  });
   return issueListQuery;
+}
+
+export function useLabels() {
+  const labelsQuery = useQuery(["labels"], () =>
+    fetch("/api/labels").then((res) => res.json())
+  );
+  return labelsQuery;
 }

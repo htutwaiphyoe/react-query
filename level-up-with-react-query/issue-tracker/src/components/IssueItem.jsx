@@ -3,6 +3,7 @@ import { GoIssueOpened, GoIssueClosed, GoComment } from "react-icons/go";
 import { closedStatus } from "../helpers/constants";
 import { relativeDate } from "../helpers/relativeDate";
 import { useUser } from "../hooks/useFetchApis";
+import Label from "./Label";
 
 const IssueItem = ({
   title,
@@ -30,9 +31,7 @@ const IssueItem = ({
         <span>
           <Link to={`/issue/${number}`}>{title}</Link>
           {labels.map((label) => (
-            <span key={label} className={`label red`}>
-              {label}
-            </span>
+            <Label key={label} label={label} />
           ))}
         </span>
         <small>
