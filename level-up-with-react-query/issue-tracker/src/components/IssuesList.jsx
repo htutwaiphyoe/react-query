@@ -2,8 +2,8 @@ import IssueItem from "./IssueItem";
 import Loader from "./Loader";
 import { useIssueList } from "../hooks/useFetchApis";
 
-export default function IssuesList({ labels }) {
-  const issueListQuery = useIssueList(labels);
+export default function IssuesList({ labels, status }) {
+  const issueListQuery = useIssueList({ labels, status });
 
   return (
     <div>

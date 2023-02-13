@@ -148,3 +148,11 @@ for searching, useQuery can be called multiple times so use debounce or move to 
 https://codesandbox.io/s/gnjn55?file=%2FApp.js&from-sandpack=true
 
 pass object in query key for filtering
+
+11. Filtering issues with labels
+
+render label in issue and labels, filter issues with labels
+
+12. Filtering issues with status
+
+render status select and filter issue list with status in useIssueList

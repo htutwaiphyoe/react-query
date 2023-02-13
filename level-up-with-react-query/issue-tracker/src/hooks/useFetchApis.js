@@ -7,12 +7,16 @@ export function useUser(userId) {
   return userQuery;
 }
 
-export function useIssueList(labels) {
-  const issueListQuery = useQuery(["issues", { labels }], async () => {
+export function useIssueList({ labels, status }) {
+  const issueListQuery = useQuery(["issues", { labels, status }], async () => {
     const labelQueryString = labels
       .map((label) => `labels[]=${label}`)
       .join("&");
-    return fetch(`/api/issues?${labelQueryString}`).then((res) => res.json());
+    const statusQueryString = status ? `&status=${status}` : "";
+
+    return fetch(`/api/issues?${labelQueryString}${statusQueryString}`).then(
+      (res) => res.json()
+    );
   });
   return issueListQuery;
 }
