@@ -170,3 +170,41 @@ enable query if input has search filter, put data fetching to onSubmit for defer
 15. Issue search
 
 add search input and search query. render search results if search query is enabled, handle search input clear
+
+16. Cache state and Devtool
+
+result of query state => error, loading, success
+query state => idle, fetching, paused
+internal cache state => fresh, stale (to know when to fetch)
+
+react query is all about server state
+
+loading => no data first time
+fetching => every time query is fetched or re-fetched
+
+if server data is updated, need to inform react query to refetch data
+
+fresh => server state won't change soon
+stale => might already out of date
+
+by default, every query marks as stale, isStale state.
+
+cache will be inactive if the component of the query is unmounted, data is kept in cache but might be removed later
+
+React query dev tools gives the display of state transitions (current state of cache)
+
+import ReactQueryDevtools from react-query/devtools and add inside of QueryClientProvider, automatically hide in production
+
+can configure stateTime in each query, that will make cache as fresh in that time, after that cache is stale and eligible for refetching
+
+stateTime: Infinity => fresh forever
+
+to refetch stale query, there are four signals
+
+1. refetchInterval
+2. refetchIntervalInBackground
+3. refetchOnMount => default true
+4. refetchOnReconnect => default true
+5. refetchOnWindowFocus => default true
+
+Inactive query will be removed after 5 mins by default but can configure with cacheTime, no cache, react query reload from start
