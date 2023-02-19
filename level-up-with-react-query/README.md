@@ -211,4 +211,21 @@ Inactive query will be removed after 5 mins by default but can configure with ca
 
 17. Integration devtool
 
+added devtool and configure state time in some queries
 
+18. Error Handling
+
+Why query fails
+
+1. Network error
+2. Invalid query parameters
+3. Server failures
+4. Insufficient permission
+
+every promise rejection is error in react
+fetch does not reject 500 error by default , use axios
+use ErrorBoundary for global error handling, useErrorBoundary option (catch error, throw to react then pass to nearest ErrorBoundary)
+onError callback for individual query
+isError property for individual query
+
+query fail at second time but still has cache => so show data first and then show error or show both cache data and error
