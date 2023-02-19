@@ -208,3 +208,7 @@ to refetch stale query, there are four signals
 5. refetchOnWindowFocus => default true
 
 Inactive query will be removed after 5 mins by default but can configure with cacheTime, no cache, react query reload from start
+
+17. Integration devtool
+
+

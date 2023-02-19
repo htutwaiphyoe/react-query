@@ -1,29 +1,39 @@
 import { useQuery } from "react-query";
 
 export function useUser(userId) {
-  const userQuery = useQuery(["users", userId], () =>
-    fetch(`/api/users/${userId}`).then((res) => res.json())
+  const userQuery = useQuery(
+    ["users", userId],
+    () => fetch(`/api/users/${userId}`).then((res) => res.json()),
+    { staleTime: 1000 * 60 * 5 }
   );
   return userQuery;
 }
 
 export function useIssueList({ labels, status }) {
-  const issueListQuery = useQuery(["issues", { labels, status }], async () => {
-    const labelQueryString = labels
-      .map((label) => `labels[]=${label}`)
-      .join("&");
-    const statusQueryString = status ? `&status=${status}` : "";
+  const issueListQuery = useQuery(
+    ["issues", { labels, status }],
+    async () => {
+      const labelQueryString = labels
+        .map((label) => `labels[]=${label}`)
+        .join("&");
+      const statusQueryString = status ? `&status=${status}` : "";
 
-    return fetch(`/api/issues?${labelQueryString}${statusQueryString}`).then(
-      (res) => res.json()
-    );
-  });
+      return fetch(`/api/issues?${labelQueryString}${statusQueryString}`).then(
+        (res) => res.json()
+      );
+    },
+    { staleTime: 1000 * 60 }
+  );
   return issueListQuery;
 }
 
 export function useLabels() {
-  const labelsQuery = useQuery(["labels"], () =>
-    fetch("/api/labels").then((res) => res.json())
+  const labelsQuery = useQuery(
+    ["labels"],
+    () => fetch("/api/labels").then((res) => res.json()),
+    {
+      staleTime: 1000 * 60 * 60,
+    }
   );
   return labelsQuery;
 }
