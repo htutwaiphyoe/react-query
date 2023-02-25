@@ -1,15 +1,15 @@
-import { useQuery } from "react-query";
 import IssueItem from "./IssueItem";
+import Loader from "./Loader";
 import { useIssueList } from "../hooks/useFetchApis";
 
-export default function IssuesList() {
-  const issueListQuery = useIssueList();
+export default function IssuesList({ labels, status }) {
+  const issueListQuery = useIssueList({ labels, status });
 
   return (
     <div>
       <h2>Issues List</h2>
       {issueListQuery.isLoading ? (
-        <p>Loading...</p>
+        <Loader />
       ) : (
         <ul className="issues-list">
           {issueListQuery.data.map((issue) => (

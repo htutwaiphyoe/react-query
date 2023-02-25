@@ -135,8 +135,24 @@ depending queries => query depend on another query
 fetchStatus => request state
 status => result of query state
 
-idle and isLoading => loading
+idle and isLoading => null
+!idle and isLoading => loading
+idle and !isLoading => success
 
 handling api calling with user actions
 
 for searching, useQuery can be called multiple times so use debounce or move to onSubmit (deferred query)
+
+10. (PRACTICE) QUERYING FILTERED DATA
+
+https://codesandbox.io/s/gnjn55?file=%2FApp.js&from-sandpack=true
+
+pass object in query key for filtering
+
+11. Filtering issues with labels
+
+render label in issue and labels, filter issues with labels
+
+12. Filtering issues with status
+
+render status select and filter issue list with status in useIssueList

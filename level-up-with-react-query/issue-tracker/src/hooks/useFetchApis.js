@@ -7,9 +7,23 @@ export function useUser(userId) {
   return userQuery;
 }
 
-export function useIssueList() {
-  const issueListQuery = useQuery(["issues"], () =>
-    fetch("/api/issues").then((res) => res.json())
-  );
+export function useIssueList({ labels, status }) {
+  const issueListQuery = useQuery(["issues", { labels, status }], async () => {
+    const labelQueryString = labels
+      .map((label) => `labels[]=${label}`)
+      .join("&");
+    const statusQueryString = status ? `&status=${status}` : "";
+
+    return fetch(`/api/issues?${labelQueryString}${statusQueryString}`).then(
+      (res) => res.json()
+    );
+  });
   return issueListQuery;
+}
+
+export function useLabels() {
+  const labelsQuery = useQuery(["labels"], () =>
+    fetch("/api/labels").then((res) => res.json())
+  );
+  return labelsQuery;
 }
