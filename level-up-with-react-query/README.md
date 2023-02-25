@@ -160,3 +160,13 @@ render status select and filter issue list with status in useIssueList
 13. Issue details page
 
 add issue details header and comment list
+
+14. (PRACTICE) search queries
+
+https://codesandbox.io/s/wypuno?file=%2FApp.js&from-sandpack=true
+
+enable query if input has search filter, put data fetching to onSubmit for deferred query, check idle state of query for enable config, add search in query key
+
+15. Issue search
+
+add search input and search query. render search results if search query is enabled, handle search input clear

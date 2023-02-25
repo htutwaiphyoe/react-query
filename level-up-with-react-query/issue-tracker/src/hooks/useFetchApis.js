@@ -41,3 +41,12 @@ export function useIssueComments(issueNo) {
   );
   return issueCommentsQuery;
 }
+
+export function useSearchQuery(search) {
+  const useSearchQuery = useQuery(
+    ["issues", "search", search],
+    () => fetch(`/api/search/issues?q=${search}`).then((res) => res.json()),
+    { enabled: !!search }
+  );
+  return useSearchQuery;
+}
