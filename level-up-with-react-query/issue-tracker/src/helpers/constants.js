@@ -1,6 +1,6 @@
 export const closedStatus = ["done", "cancelled"];
 
-export const status = [
+export const statuses = [
   { id: "backlog", label: "Backlog" },
   { id: "todo", label: "To do" },
   { id: "inProgress", label: "In Progress" },

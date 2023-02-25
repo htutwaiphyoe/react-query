@@ -156,3 +156,7 @@ render label in issue and labels, filter issues with labels
 12. Filtering issues with status
 
 render status select and filter issue list with status in useIssueList
+
+13. Issue details page
+
+add issue details header and comment list

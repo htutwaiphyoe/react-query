@@ -27,3 +27,17 @@ export function useLabels() {
   );
   return labelsQuery;
 }
+
+export function useIssue(issueNo) {
+  const issueQuery = useQuery(["issues", issueNo], () =>
+    fetch(`/api/issues/${issueNo}`).then((res) => res.json())
+  );
+  return issueQuery;
+}
+
+export function useIssueComments(issueNo) {
+  const issueCommentsQuery = useQuery(["issues", issueNo, "comments"], () =>
+    fetch(`/api/issues/${issueNo}/comments`).then((res) => res.json())
+  );
+  return issueCommentsQuery;
+}

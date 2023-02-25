@@ -1,4 +1,4 @@
-import { status } from "../helpers/constants";
+import { statuses } from "../helpers/constants";
 
 export function Status({ value, onChange }) {
   return (
@@ -12,7 +12,7 @@ export function Status({ value, onChange }) {
         className="status-select"
       >
         <option value="">Select a status to filter</option>
-        {status.map((item) => (
+        {statuses.map((item) => (
           <option value={item.id} key={item.id}>
             {item.label}
           </option>
