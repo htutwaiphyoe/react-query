@@ -222,10 +222,15 @@ Why query fails
 3. Server failures
 4. Insufficient permission
 
-every promise rejection is error in react
+every promise rejection is error in react query
 fetch does not reject 500 error by default , use axios
 use ErrorBoundary for global error handling, useErrorBoundary option (catch error, throw to react then pass to nearest ErrorBoundary)
-onError callback for individual query
-isError property for individual query
+onError callback for individual query for toast
+isError property and error object for individual query
 
 query fail at second time but still has cache => so show data first and then show error or show both cache data and error
+
+19. (PRACTICE) error handling
+
+x-error header => 50% error
+update fetch function for error, show error message and callback
