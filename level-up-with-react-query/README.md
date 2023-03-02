@@ -234,3 +234,7 @@ query fail at second time but still has cache => so show data first and then sho
 
 x-error header => 50% error
 update fetch function for error, show error message and callback
+
+20. Integration error handling
+
+reset means clear cache and refetch query, react query retry query 4 times automatically if the query fails and after that show error , configure retry with retry option, added error boundary
