@@ -6,6 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import { worker } from "@uidotdev/react-query-api";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ErrorBoundary } from "react-error-boundary";
+import Error from "./components/Error";
 
 const client = new QueryClient();
 
@@ -21,9 +23,11 @@ new Promise((res) => setTimeout(res, 100))
       <React.StrictMode>
         <QueryClientProvider client={client}>
           <BrowserRouter>
-            <div className="container">
-              <App />
-            </div>
+            <ErrorBoundary FallbackComponent={Error}>
+              <div className="container">
+                <App />
+              </div>
+            </ErrorBoundary>
           </BrowserRouter>
           <ReactQueryDevtools />
         </QueryClientProvider>

@@ -1,9 +1,10 @@
 import { useQuery } from "react-query";
+import fetchWithError from "../helpers/fetchWithError";
 
 export function useUser(userId) {
   const userQuery = useQuery(
     ["users", userId],
-    () => fetch(`/api/users/${userId}`).then((res) => res.json()),
+    () => fetchWithError(`/api/users/${userId}`),
     { staleTime: 1000 * 60 * 5 }
   );
   return userQuery;
@@ -17,12 +18,11 @@ export function useIssueList({ labels, status }) {
         .map((label) => `labels[]=${label}`)
         .join("&");
       const statusQueryString = status ? `&status=${status}` : "";
-
-      return fetch(`/api/issues?${labelQueryString}${statusQueryString}`).then(
-        (res) => res.json()
+      return fetchWithError(
+        `/api/issues?${labelQueryString}${statusQueryString}`
       );
     },
-    { staleTime: 1000 * 60 }
+    { staleTime: 1000 * 60, useErrorBoundary: true }
   );
   return issueListQuery;
 }
@@ -30,24 +30,29 @@ export function useIssueList({ labels, status }) {
 export function useLabels() {
   const labelsQuery = useQuery(
     ["labels"],
-    () => fetch("/api/labels").then((res) => res.json()),
+    () => fetchWithError("/api/labels"),
     {
       staleTime: 1000 * 60 * 60,
+      useErrorBoundary: true,
     }
   );
   return labelsQuery;
 }
 
 export function useIssue(issueNo) {
-  const issueQuery = useQuery(["issues", issueNo], () =>
-    fetch(`/api/issues/${issueNo}`).then((res) => res.json())
+  const issueQuery = useQuery(
+    ["issues", issueNo],
+    () => fetchWithError(`/api/issues/${issueNo}`),
+    { useErrorBoundary: true }
   );
   return issueQuery;
 }
 
 export function useIssueComments(issueNo) {
-  const issueCommentsQuery = useQuery(["issues", issueNo, "comments"], () =>
-    fetch(`/api/issues/${issueNo}/comments`).then((res) => res.json())
+  const issueCommentsQuery = useQuery(
+    ["issues", issueNo, "comments"],
+    () => fetchWithError(`/api/issues/${issueNo}/comments`),
+    { useErrorBoundary: true }
   );
   return issueCommentsQuery;
 }
@@ -55,8 +60,8 @@ export function useIssueComments(issueNo) {
 export function useSearchQuery(search) {
   const useSearchQuery = useQuery(
     ["issues", "search", search],
-    () => fetch(`/api/search/issues?q=${search}`).then((res) => res.json()),
-    { enabled: !!search }
+    () => fetchWithError(`/api/search/issues?q=${search}`),
+    { enabled: !!search, useErrorBoundary: true }
   );
   return useSearchQuery;
 }
