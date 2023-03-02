@@ -1,3 +1,7 @@
 export default function Error({ error }) {
-  return <div className="error">An error occurred. Please try again.</div>;
+  return (
+    <div className="error">
+      {error.message || "An error occurred. Please try again."}
+    </div>
+  );
 }

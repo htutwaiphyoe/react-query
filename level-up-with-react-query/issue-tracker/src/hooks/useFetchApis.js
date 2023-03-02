@@ -22,7 +22,7 @@ export function useIssueList({ labels, status }) {
         `/api/issues?${labelQueryString}${statusQueryString}`
       );
     },
-    { staleTime: 1000 * 60 }
+    { staleTime: 1000 * 60, useErrorBoundary: true }
   );
   return issueListQuery;
 }
@@ -33,21 +33,26 @@ export function useLabels() {
     () => fetchWithError("/api/labels"),
     {
       staleTime: 1000 * 60 * 60,
+      useErrorBoundary: true,
     }
   );
   return labelsQuery;
 }
 
 export function useIssue(issueNo) {
-  const issueQuery = useQuery(["issues", issueNo], () =>
-    fetchWithError(`/api/issues/${issueNo}`)
+  const issueQuery = useQuery(
+    ["issues", issueNo],
+    () => fetchWithError(`/api/issues/${issueNo}`),
+    { useErrorBoundary: true }
   );
   return issueQuery;
 }
 
 export function useIssueComments(issueNo) {
-  const issueCommentsQuery = useQuery(["issues", issueNo, "comments"], () =>
-    fetchWithError(`/api/issues/${issueNo}/comments`)
+  const issueCommentsQuery = useQuery(
+    ["issues", issueNo, "comments"],
+    () => fetchWithError(`/api/issues/${issueNo}/comments`),
+    { useErrorBoundary: true }
   );
   return issueCommentsQuery;
 }
@@ -56,7 +61,7 @@ export function useSearchQuery(search) {
   const useSearchQuery = useQuery(
     ["issues", "search", search],
     () => fetchWithError(`/api/search/issues?q=${search}`),
-    { enabled: !!search }
+    { enabled: !!search, useErrorBoundary: true }
   );
   return useSearchQuery;
 }
