@@ -269,3 +269,7 @@ new QueryClient({
 ```
 
 can access queryClient directly for imperative scenario (programmatic approach) from useQueryClient hook, give instance of queryClient => queryClient has many methods for query
+
+22. Integration global configuration
+
+added staleTime global configuration for one minute
