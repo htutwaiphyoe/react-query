@@ -238,3 +238,34 @@ update fetch function for error, show error message and callback
 20. Integration error handling
 
 reset means clear cache and refetch query, react query retry query 4 times automatically if the query fails and after that show error , configure retry with retry option, added error boundary
+
+21. Query client
+
+query client => query + cache => can overwrite default configurations or add in individual query
+
+global configuration => individual can overwrite global configuration
+can create default query function with query key params => useQuery without query function
+query key makes every query unique => query key should be like REST Api endpoint so that query key can create URL => BASE_URL + queryKey.join("/") + "?" + new URLSearchParams(paramObjet).toString()
+
+use this way if api endpoint is standard
+
+react query is all about server state management
+
+```js
+const url = `/issues/${id}`
+const key = ["issues", id]
+
+new QueryClient({
+    defaultOptions: {
+        queries: {
+            ...,
+            queryFn: ({ queryKey }) => {}
+        },
+        mutations: {
+            ...
+        }
+    }
+})
+```
+
+can access queryClient directly for imperative scenario (programmatic approach) from useQueryClient hook, give instance of queryClient => queryClient has many methods for query
