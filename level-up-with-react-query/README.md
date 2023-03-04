@@ -269,7 +269,17 @@ new QueryClient({
 ```
 
 can access queryClient directly for imperative scenario (programmatic approach) from useQueryClient hook, give instance of queryClient => queryClient has many methods for query
+[query client methods](https://tanstack.com/query/v4/docs/react/reference/QueryClient)
 
 22. Integration global configuration
 
 added staleTime global configuration for one minute
+
+23. Manual query refetching
+
+active queries only refetch automatically
+to manual refetch in background, there are two options.
+use refetchQueries => refetch both active/inactive queries that matches query key (can cause unnecessary refetch)
+use invalidateQueries => make both active/inactive queries query that matches query key as stale and refetch active queries only
+
+can configure react query to choose what queries to refetch based on query key and query filter
