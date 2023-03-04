@@ -9,7 +9,14 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "./components/Error";
 
-const client = new QueryClient();
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60,
+      useErrorBoundary: true,
+    },
+  },
+});
 
 new Promise((res) => setTimeout(res, 100))
   .then(() =>
