@@ -282,4 +282,13 @@ to manual refetch in background, there are two options.
 use refetchQueries => refetch both active/inactive queries that matches query key (can cause unnecessary refetch)
 use invalidateQueries => make both active/inactive queries query that matches query key as stale and refetch active queries only
 
+changing inactive query to active query, stale cache only refetch
+
 can configure react query to choose what queries to refetch based on query key and query filter
+
+24. (PRACTICE) manual query invalidation
+
+https://codesandbox.io/s/2lkzgw?file=/App.js&from-sandpack=true
+
+for same component, can use refetch method
+refetch does not make cache as stale but invalidateQueries does
