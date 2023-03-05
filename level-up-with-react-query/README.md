@@ -386,3 +386,7 @@ queryClient.prefetchQuery(queryKey, queryFn) does not return data but stores in 
 can prefetch for next page in current page
 
 prefetching needs query variables and tight coupling between queries
+
+33. (PRACTICE) Placeholder data
+
+https://codesandbox.io/s/r5zzci?file=%2FApp.js&from-sandpack=true
