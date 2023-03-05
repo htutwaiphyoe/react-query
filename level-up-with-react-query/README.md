@@ -349,3 +349,7 @@ isLoading shows when query is fetching first time, when it re-fetches, it shows 
 [url constructor](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL)
 
 https://codesandbox.io/s/0lqt92?file=/App.js&from-sandpack=true
+
+31. Integration fetching state
+
+show loader when query is refetching in background

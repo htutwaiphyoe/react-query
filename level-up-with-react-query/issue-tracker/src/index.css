@@ -409,7 +409,8 @@ form input {
   position: fixed;
   top: 0;
   right: 0;
-  margin: 1rem;
+  margin-right: 3rem;
+  margin-top: 1rem;
   z-index: 10;
   pointer-events: none;
 }
