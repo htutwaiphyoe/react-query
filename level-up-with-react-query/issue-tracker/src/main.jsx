@@ -8,12 +8,14 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "./components/Error";
+import FetchingIndicator from "./components/FetchingIndicator";
 
 const client = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 1000 * 60,
       useErrorBoundary: true,
+      retry: false,
     },
   },
 });
@@ -36,6 +38,7 @@ new Promise((res) => setTimeout(res, 100))
               </div>
             </ErrorBoundary>
           </BrowserRouter>
+          <FetchingIndicator />
           <ReactQueryDevtools />
         </QueryClientProvider>
       </React.StrictMode>,

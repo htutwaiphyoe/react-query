@@ -269,7 +269,87 @@ new QueryClient({
 ```
 
 can access queryClient directly for imperative scenario (programmatic approach) from useQueryClient hook, give instance of queryClient => queryClient has many methods for query
+[query client methods](https://tanstack.com/query/v4/docs/react/reference/QueryClient)
 
 22. Integration global configuration
 
 added staleTime global configuration for one minute
+
+23. Manual query refetching
+
+active queries only refetch automatically
+to manual refetch in background, there are two options.
+use refetchQueries => refetch both active/inactive queries that matches query key (can cause unnecessary refetch)
+use invalidateQueries => make both active/inactive queries query that matches query key as stale and refetch active queries only
+
+changing inactive query to active query, stale cache only refetch
+
+can configure react query to choose what queries to refetch based on query key and query filter
+
+24. (PRACTICE) manual query invalidation
+
+https://codesandbox.io/s/2lkzgw?file=/App.js&from-sandpack=true
+
+refetch does not make cache as stale but invalidateQueries does
+
+25. Query filters
+
+to control the react query what to refetch
+
+query key is also one of query filters
+
+react query refetch every query that matches query key (not exact match)
+
+no query key => refetch all queries
+
+to refetch a query that matches query key exactly, pass filter object in second argument, {exact: true}
+
+no need to pass query key and filter object is in first argument {stale: true, type: 'active'}
+
+query filters can use any queryClient functions
+
+[query filters](https://tanstack.com/query/v4/docs/react/guides/filters)
+
+26. (PRACTICE) query filters
+
+use refetch method if the query object can be accessed, else use queryClient
+
+https://codesandbox.io/s/utn6xg?file=/App.js&from-sandpack=true
+
+27. Query cancellation
+
+every computation has costs, keep costs as low as possible to save server request
+
+default auto cancel => component unmount and query key change
+
+react query informs when query is cancel and need to make it cancel by using AbortController and its signal
+react query creates AbortController and pass signal to query function, use that signal to stop request
+signal.addEventListener("abort", () => {})
+
+cancelling request is depend on the request type. eg. setTimeout and clearTimeout
+
+use cancel flag for request that is hart to cancel
+
+for fetch api, pass signal in second argument object, need to add proper error handling
+  
+manual cancel => queryClient.cancelQueries()
+
+still show old cache data if query is cancelled, for the first time cancel, query will be idle state until refetch
+
+28. Integrating query cancellation
+
+add query cancellation with abort controller signal in all queries
+
+29. isFetching and useIsFetching
+
+isLoading shows when query is fetching first time, when it re-fetches, it shows cache data while refetching in background. To know background refetching state of specific query, use isFetching. For background fetching of any queries cross entire app, use useIsFetching hook and can pass query filters. It returns the number of queries that refetch in the background
+
+30. (PRACTICE) Fetching states
+
+[url constructor](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL)
+
+https://codesandbox.io/s/0lqt92?file=/App.js&from-sandpack=true
+
+31. Integration fetching state
+
+show loader when query is refetching in background
