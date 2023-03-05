@@ -343,3 +343,9 @@ add query cancellation with abort controller signal in all queries
 29. isFetching and useIsFetching
 
 isLoading shows when query is fetching first time, when it re-fetches, it shows cache data while refetching in background. To know background refetching state of specific query, use isFetching. For background fetching of any queries cross entire app, use useIsFetching hook and can pass query filters. It returns the number of queries that refetch in the background
+
+30. (PRACTICE) Fetching states
+
+[url constructor](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL)
+
+https://codesandbox.io/s/0lqt92?file=/App.js&from-sandpack=true
