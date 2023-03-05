@@ -310,13 +310,13 @@ query filters can use any queryClient functions
 
 [query filters](https://tanstack.com/query/v4/docs/react/guides/filters)
 
-25. (PRACTICE) query filters
+26. (PRACTICE) query filters
 
 use refetch method if the query object can be accessed, else use queryClient
 
 https://codesandbox.io/s/utn6xg?file=/App.js&from-sandpack=true
 
-26. Query cancellation
+27. Query cancellation
 
 every computation has costs, keep costs as low as possible to save server request
 
@@ -335,3 +335,7 @@ for fetch api, pass signal in second argument object, need to add proper error h
 manual cancel => queryClient.cancelQueries()
 
 still show old cache data if query is cancelled, for the first time cancel, query will be idle state until refetch
+
+28. Integrating query cancellation
+
+add query cancellation with abort controller signal in all queries
