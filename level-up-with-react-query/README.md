@@ -315,3 +315,23 @@ query filters can use any queryClient functions
 use refetch method if the query object can be accessed, else use queryClient
 
 https://codesandbox.io/s/utn6xg?file=/App.js&from-sandpack=true
+
+26. Query cancellation
+
+every computation has costs, keep costs as low as possible to save server request
+
+default auto cancel => component unmount and query key change
+
+react query informs when query is cancel and need to make it cancel by using AbortController and its signal
+react query creates AbortController and pass signal to query function, use that signal to stop request
+signal.addEventListener("abort", () => {})
+
+cancelling request is depend on the request type. eg. setTimeout and clearTimeout
+
+use cancel flag for request that is hart to cancel
+
+for fetch api, pass signal in second argument object, need to add proper error handling
+  
+manual cancel => queryClient.cancelQueries()
+
+still show old cache data if query is cancelled, for the first time cancel, query will be idle state until refetch
