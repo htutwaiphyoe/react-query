@@ -290,7 +290,6 @@ can configure react query to choose what queries to refetch based on query key a
 
 https://codesandbox.io/s/2lkzgw?file=/App.js&from-sandpack=true
 
-for same component, can use refetch method
 refetch does not make cache as stale but invalidateQueries does
 
 25. Query filters
@@ -310,3 +309,9 @@ no need to pass query key and filter object is in first argument {stale: true, t
 query filters can use any queryClient functions
 
 [query filters](https://tanstack.com/query/v4/docs/react/guides/filters)
+
+25. (PRACTICE) query filters
+
+use refetch method if the query object can be accessed, else use queryClient
+
+https://codesandbox.io/s/utn6xg?file=/App.js&from-sandpack=true
