@@ -292,3 +292,21 @@ https://codesandbox.io/s/2lkzgw?file=/App.js&from-sandpack=true
 
 for same component, can use refetch method
 refetch does not make cache as stale but invalidateQueries does
+
+25. Query filters
+
+to control the react query what to refetch
+
+query key is also one of query filters
+
+react query refetch every query that matches query key (not exact match)
+
+no query key => refetch all queries
+
+to refetch a query that matches query key exactly, pass filter object in second argument, {exact: true}
+
+no need to pass query key and filter object is in first argument {stale: true, type: 'active'}
+
+query filters can use any queryClient functions
+
+[query filters](https://tanstack.com/query/v4/docs/react/guides/filters)
