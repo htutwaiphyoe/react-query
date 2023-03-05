@@ -339,3 +339,7 @@ still show old cache data if query is cancelled, for the first time cancel, quer
 28. Integrating query cancellation
 
 add query cancellation with abort controller signal in all queries
+
+29. isFetching and useIsFetching
+
+isLoading shows when query is fetching first time, when it re-fetches, it shows cache data while refetching in background. To know background refetching state of specific query, use isFetching. For background fetching of any queries cross entire app, use useIsFetching hook and can pass query filters. It returns the number of queries that refetch in the background
