@@ -390,3 +390,9 @@ prefetching needs query variables and tight coupling between queries
 33. (PRACTICE) Placeholder data
 
 https://codesandbox.io/s/r5zzci?file=%2FApp.js&from-sandpack=true
+
+34. (PRACTICE) Initial data
+
+initial or placeholder data match the structure of actual data
+
+https://codesandbox.io/s/3npvt4?file=%2FApp.js&from-sandpack=true
