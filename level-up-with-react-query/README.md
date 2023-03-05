@@ -396,3 +396,7 @@ https://codesandbox.io/s/r5zzci?file=%2FApp.js&from-sandpack=true
 initial or placeholder data match the structure of actual data
 
 https://codesandbox.io/s/3npvt4?file=%2FApp.js&from-sandpack=true
+
+35. (PRACTICE) Preloading data
+
+https://codesandbox.io/s/y37rqq?file=%2FApp.js&from-sandpack=true
