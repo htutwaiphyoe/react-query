@@ -353,3 +353,36 @@ https://codesandbox.io/s/0lqt92?file=/App.js&from-sandpack=true
 31. Integration fetching state
 
 show loader when query is refetching in background
+
+32. Prefetching queries
+
+can control the loading state that user see, react query provides cache so that no need to show loading again
+
+placeholderData is like default value for data (same as default value when destructuring) and is not stored in cache. It is returned when query is fetching in background and after that it is replaced by actual data. 
+
+isPlaceholderData is for checking data is placeholderData and use for depending queries to check not to use placeholder data in enable option
+
+placeholder data is for fake data so that it is not stored in cache
+
+to get real data in query and have in the cache, use initialData. real data means similar data on the server and default is stale
+
+initialDataUpdatedAt is for the time when initialData is last updated and it is checked with stale time to refetch query again
+
+can access cache data with query client, use list data cache for initial data of detail page
+
+to preload initial data of previous query, give initial data as function so that can avoid heavy calculation every component render if use data directly and only called once when component is mounted, and use queryClient.getQueryData(queryFilters) to fetch cache data or undefined if no cache and then search detail item and return it, will still show loading if query is loaded before previous query
+
+need to know initial data is stale or not depending on how long previous query is last fetched, queryClient.getQueryState(queryFilters) give state of the query and use dateUpdatedAt in initialDataUpdatedAt function so that stale time calculation is correct
+
+pull => get cache data of previous query for initial data of individual query
+push => store cache data for future queries if query can provide initial data for another queries
+
+use queryClient.setQueryData(queryFilters) for setting data into the cache manually and dataUpdatedAt is the moment when call setQueryData
+
+initial data also need to be fetched so use user action and preload eg. hover event or analytic data
+
+queryClient.prefetchQuery(queryKey, queryFn) does not return data but stores in cache
+
+can prefetch for next page in current page
+
+prefetching needs query variables and tight coupling between queries
