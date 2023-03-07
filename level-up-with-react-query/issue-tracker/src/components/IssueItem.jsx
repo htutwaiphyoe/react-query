@@ -4,6 +4,8 @@ import { closedStatus } from "../helpers/constants";
 import { relativeDate } from "../helpers/relativeDate";
 import { useUser } from "../hooks/useFetchApis";
 import Label from "./Label";
+import { useQueryClient } from "react-query";
+import fetchWithError from "../helpers/fetchWithError";
 
 const IssueItem = ({
   title,
@@ -17,9 +19,20 @@ const IssueItem = ({
 }) => {
   const assigneeUser = useUser(assignee);
   const createdByUser = useUser(createdBy);
+  const queryClient = useQueryClient();
 
   return (
-    <li>
+    <li
+      onMouseOver={() => {
+        queryClient.prefetchQuery(["issues", number.toString()], () =>
+          fetchWithError(`/api/issues/${number}`)
+        );
+        queryClient.prefetchQuery(
+          ["issues", number.toString(), "comments"],
+          () => fetchWithError(`/api/issues/${number}/comments`)
+        );
+      }}
+    >
       <div>
         {closedStatus.includes(status) ? (
           <GoIssueClosed style={{ color: "red" }} />

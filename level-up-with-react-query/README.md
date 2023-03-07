@@ -400,3 +400,9 @@ https://codesandbox.io/s/3npvt4?file=%2FApp.js&from-sandpack=true
 35. (PRACTICE) Preloading data
 
 https://codesandbox.io/s/y37rqq?file=%2FApp.js&from-sandpack=true
+
+36. Integrating prefetching
+
+use default placeholder data for label list, add push query for issue detail from issue list and prefetch issue detail when hover
+
+react query key is sensitive with type

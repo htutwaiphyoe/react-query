@@ -1,5 +1,6 @@
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import fetchWithError from "../helpers/fetchWithError";
+import { defaultLabels } from "../helpers/defaultData";
 
 export function useUser(userId) {
   const userQuery = useQuery(
@@ -11,6 +12,7 @@ export function useUser(userId) {
 }
 
 export function useIssueList({ labels, status }) {
+  const queryClient = useQueryClient();
   const issueListQuery = useQuery(
     ["issues", { labels, status }],
     async ({ signal }) => {
@@ -18,10 +20,16 @@ export function useIssueList({ labels, status }) {
         .map((label) => `labels[]=${label}`)
         .join("&");
       const statusQueryString = status ? `&status=${status}` : "";
-      return fetchWithError(
+      const result = await fetchWithError(
         `/api/issues?${labelQueryString}${statusQueryString}`,
         { signal }
       );
+
+      result.forEach((issue) => {
+        queryClient.setQueryData(["issues", `${issue.number}`], issue);
+      });
+
+      return result;
     }
   );
   return issueListQuery;
@@ -33,6 +41,7 @@ export function useLabels() {
     ({ signal }) => fetchWithError("/api/labels", { signal }),
     {
       staleTime: 1000 * 60 * 60,
+      placeholderData: defaultLabels,
     }
   );
   return labelsQuery;
