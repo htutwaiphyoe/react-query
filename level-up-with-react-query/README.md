@@ -439,6 +439,16 @@ https://codesandbox.io/s/ngh641?file=%2FApp.js&from-sandpack=true
 
 update cache in onSuccess, invalidate/refetch in onSettled and show loading state and reset form for better UX
 
-40. Add issue
+39. Add issue
 
 create form, mutate on submit, invalidate, setQueryData and redirect to issue detail page
+
+40. Optimistic updates
+
+updating cache with fake data while mutation and faking like mutation success in ui due to api delay
+
+use onMutate for optimistic updates with fake data by setQueryData
+
+the problem are the fake one and the real one will be two records and the fake one is removed after invalidate success and when the mutation fails, the fake one is still showing
+
+return rollback function(remove fake data back) onMutate to solve these problems and get preview data with getQueryData and set it in rollback function and access and call rollback function in onSuccess/onError with third arguments
