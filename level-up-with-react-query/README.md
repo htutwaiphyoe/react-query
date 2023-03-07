@@ -432,3 +432,9 @@ depending on returned data refetch with invalidate or refetch
 lifecycle callbacks get access to variables that pass to mutate function
 
 update the cache manually + invalidate/refetch updated data in background
+
+38. (PRACTICE) Mutations
+
+https://codesandbox.io/s/ngh641?file=%2FApp.js&from-sandpack=true
+
+update cache in onSuccess, invalidate/refetch in onSettled and show loading state and reset form for better UX
