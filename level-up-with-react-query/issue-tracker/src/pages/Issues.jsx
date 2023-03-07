@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import IssuesList from "../components/IssuesList";
 import LabelList from "../components/LabelList";
 import { Status } from "../components/Status";
@@ -24,6 +25,10 @@ export default function Issues() {
         <aside>
           <LabelList labels={labels} toggle={toggle} />
           <Status value={status} onChange={(e) => setStatus(e.target.value)} />
+          <hr />
+          <Link className="button" to="/add">
+            Add Issue
+          </Link>
         </aside>
       </main>
     </div>

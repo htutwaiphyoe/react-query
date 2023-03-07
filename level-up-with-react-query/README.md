@@ -438,3 +438,7 @@ update the cache manually + invalidate/refetch updated data in background
 https://codesandbox.io/s/ngh641?file=%2FApp.js&from-sandpack=true
 
 update cache in onSuccess, invalidate/refetch in onSettled and show loading state and reset form for better UX
+
+40. Add issue
+
+create form, mutate on submit, invalidate, setQueryData and redirect to issue detail page
