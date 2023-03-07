@@ -406,3 +406,29 @@ https://codesandbox.io/s/y37rqq?file=%2FApp.js&from-sandpack=true
 use default placeholder data for label list, add push query for issue detail from issue list and prefetch issue detail when hover
 
 react query key is sensitive with type
+
+37. Mutations
+
+state management library =>  get and update state
+
+react query => useQuery for get and useMutation for update
+
+mutation still have challenges like useQuery eg. loading, error and without react query it is like a hell
+
+useMutation tracks state of mutation sent to the server
+
+use mutate function to trigger the request
+
+useQuery is declarative and useMutation is imperative
+
+useMutation still get query state like useQuery and data means response of mutation
+
+mutation can reset to clear returned data, reset() and onSuccess, onMutate, onError lifecycle callbacks are provided
+
+useMutation is no need to pass mutation key and no cache. useMutation is not responsible for updated cache after mutation
+
+depending on returned data refetch with invalidate or refetch
+
+lifecycle callbacks get access to variables that pass to mutate function
+
+update the cache manually + invalidate/refetch updated data in background
