@@ -464,3 +464,23 @@ render current assignee, assignee menu and mutate on click. add optimistic updat
 43. Update issue labels
 
 render current labels, labels menu and mutate on click. add optimistic update and rollback onError and invalidate onSettled
+
+44. Paginated queries
+
+single api should not return all data. paginated api for data, use page and perPage filter for pagination
+
+pass page and perPage in filter object in query key
+
+query function can access query key
+
+previous button decrease page and disable when page is 1
+
+next button increase page and disable there is no more data
+
+pagination methods =>  offset-based pagination (per_page * page), cursor-based pagination
+
+to show previous data while loading, use keepPreviousData option
+
+user can press next button multiple times, to avoid disable with isPreviousData combine with keepPreviousData, isFetching will be disabled every background refetch
+
+can prefetch next page when hover next button or current page data is loaded with useEffect using page dependencies
