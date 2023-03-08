@@ -548,3 +548,10 @@ react query takes care of optimization automatically
 react app is bad at SEO, getSever or static => page => initial data of useQuery
 
 can server add data in the cache with serialize format. create queryClient and use prefetchQuery to store in the cache and use dehydrate function and pass client to serialize and pass state of Hydrate component
+
+55. React query with Typescript
+
+useQuery<ReturnType, ErrorType, TransformationType, QueryKeyType>
+ReturnType for data, ErrorType for error, TransformationType for return data select function and QueryKeyType for query key. query key can use as const so that type will be tuple type, query key parameter type is passed to query key of query function
+
+don't destructure queryObject due to typescript to inference based program control flow
