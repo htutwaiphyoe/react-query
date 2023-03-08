@@ -72,3 +72,10 @@ export function useSearchQuery(search) {
   );
   return useSearchQuery;
 }
+
+export function useUsers() {
+  const useUsersQuery = useQuery(["users"], ({ signal }) =>
+    fetchWithError(`/api/users`, { signal })
+  );
+  return useUsersQuery;
+}

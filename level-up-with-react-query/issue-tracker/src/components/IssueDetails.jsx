@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import IssueHeader from "./IssueHeader";
 import Comment from "./Comment";
 import IssueStatus from "./IssueStatus";
+import IssueAssignee from "./IssueAssignee";
 
 export default function IssueDetails() {
   const { number } = useParams();
@@ -31,6 +32,10 @@ export default function IssueDetails() {
               <IssueStatus
                 status={issueQuery.data.status}
                 issueNumber={issueQuery.data.number.toString()}
+              />
+              <IssueAssignee
+                issueNumber={issueQuery.data.number.toString()}
+                assignee={issueQuery.data.assignee}
               />
             </aside>
           </main>

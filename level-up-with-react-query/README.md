@@ -456,3 +456,7 @@ return rollback function(remove fake data back) onMutate to solve these problems
 41. Update issue status
 
 render status select and mutate on change. add optimistic update and rollback onError and invalidate onSettled
+
+42. Update issue assignee
+
+render current assignee, assignee menu and mutate on click. add optimistic update and rollback onError and invalidate onSettled

@@ -64,3 +64,45 @@ export const useUpdateStatus = () => {
 
   return updateStatusMutate;
 };
+
+export const useUpdateAssignee = (issueNumber) => {
+  const queryClient = useQueryClient();
+
+  const updateAssigneeMutate = useMutation(
+    (assignee) => {
+      fetchWithError(`/api/issues/${issueNumber}`, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ assignee }),
+      });
+    },
+    {
+      onMutate: (assignee) => {
+        const oldAssignee = queryClient.getQueryData([
+          "issues",
+          issueNumber,
+        ]).assignee;
+
+        queryClient.setQueryData(["issues", issueNumber], (data) => ({
+          ...data,
+          assignee,
+        }));
+
+        return () => {
+          queryClient.setQueryData(["issues", issueNumber], (data) => ({
+            ...data,
+            assignee: oldAssignee,
+          }));
+        };
+      },
+      onError: (data, variables, rollback) => {
+        rollback();
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries(["issues", issueNumber], { exact: true });
+      },
+    }
+  );
+
+  return updateAssigneeMutate;
+};
