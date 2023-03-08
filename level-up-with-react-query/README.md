@@ -488,3 +488,7 @@ can prefetch next page when hover next button or current page data is loaded wit
 45. (PRACTICE) Paginated queries
 
 https://codesandbox.io/s/iisrg2?file=%2FApp.js&from-sandpack=true
+
+46. Integrating pagination in issues
+
+reset pagination when filters change, pass page in filter object and create query string for page, render pagination buttons and show previous data while loading

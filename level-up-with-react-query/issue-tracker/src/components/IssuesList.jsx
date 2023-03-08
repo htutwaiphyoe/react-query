@@ -17,9 +17,9 @@ const renderIssueItem = (issue) => (
   />
 );
 
-export default function IssuesList({ labels, status }) {
+export default function IssuesList({ labels, status, page, setPage }) {
   const [search, setSearch] = useState("");
-  const issueListQuery = useIssueList({ labels, status });
+  const issueListQuery = useIssueList({ labels, status, page });
   const searchQuery = useSearchQuery(search);
 
   const isSearchDisabled =
@@ -52,6 +52,24 @@ export default function IssuesList({ labels, status }) {
           <ul className="issues-list">
             {issueListQuery.data.map(renderIssueItem)}
           </ul>
+          <div className="pagination">
+            <button
+              onClick={() => setPage((page) => page - 1)}
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+            <p>Page: {page}</p>
+            <button
+              onClick={() => setPage((page) => page + 1)}
+              disabled={
+                issueListQuery.data.length === 0 ||
+                issueListQuery.isPreviousData
+              }
+            >
+              Next
+            </button>
+          </div>
         </>
       ) : searchQuery.isLoading ? (
         <Loader />

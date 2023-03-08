@@ -11,17 +11,18 @@ export function useUser(userId) {
   return userQuery;
 }
 
-export function useIssueList({ labels, status }) {
+export function useIssueList({ labels, status, page }) {
   const queryClient = useQueryClient();
   const issueListQuery = useQuery(
-    ["issues", { labels, status }],
+    ["issues", { labels, status, page }],
     async ({ signal }) => {
       const labelQueryString = labels
         .map((label) => `labels[]=${label}`)
         .join("&");
       const statusQueryString = status ? `&status=${status}` : "";
+      const paginationQueryString = page ? `&page=${page}` : "";
       const result = await fetchWithError(
-        `/api/issues?${labelQueryString}${statusQueryString}`,
+        `/api/issues?${labelQueryString}${statusQueryString}${paginationQueryString}`,
         { signal }
       );
 
@@ -30,7 +31,8 @@ export function useIssueList({ labels, status }) {
       });
 
       return result;
-    }
+    },
+    { keepPreviousData: true }
   );
   return issueListQuery;
 }
