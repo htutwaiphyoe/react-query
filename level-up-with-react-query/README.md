@@ -460,3 +460,7 @@ render status select and mutate on change. add optimistic update and rollback on
 42. Update issue assignee
 
 render current assignee, assignee menu and mutate on click. add optimistic update and rollback onError and invalidate onSettled
+
+43. Update issue labels
+
+render current labels, labels menu and mutate on click. add optimistic update and rollback onError and invalidate onSettled

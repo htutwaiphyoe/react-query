@@ -29,7 +29,7 @@ export const useUpdateStatus = () => {
 
   const updateStatusMutate = useMutation(
     ({ issueNumber, status }) => {
-      fetchWithError(`/api/issues/${issueNumber}`, {
+      return fetchWithError(`/api/issues/${issueNumber}`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ status }),
@@ -70,7 +70,7 @@ export const useUpdateAssignee = (issueNumber) => {
 
   const updateAssigneeMutate = useMutation(
     (assignee) => {
-      fetchWithError(`/api/issues/${issueNumber}`, {
+      return fetchWithError(`/api/issues/${issueNumber}`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ assignee }),
@@ -105,4 +105,46 @@ export const useUpdateAssignee = (issueNumber) => {
   );
 
   return updateAssigneeMutate;
+};
+
+export const useMutateIssueLabels = (issueNumber) => {
+  const queryClient = useQueryClient();
+
+  const issueLabelsMutate = useMutation(
+    (labels) => {
+      return fetchWithError(`/api/issues/${issueNumber}`, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ labels }),
+      });
+    },
+    {
+      onMutate: (labels) => {
+        const oldLabels = queryClient.getQueryData([
+          "issues",
+          issueNumber,
+        ]).labels;
+
+        queryClient.setQueryData(["issues", issueNumber], (data) => ({
+          ...data,
+          labels,
+        }));
+
+        return () => {
+          queryClient.setQueryData(["issues", issueNumber], (data) => ({
+            ...data,
+            labels: oldLabels,
+          }));
+        };
+      },
+      onError: (data, variables, rollback) => {
+        rollback();
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries(["issues", issueNumber], { exact: true });
+      },
+    }
+  );
+
+  return issueLabelsMutate;
 };
