@@ -452,3 +452,7 @@ use onMutate for optimistic updates with fake data by setQueryData
 the problem are the fake one and the real one will be two records and the fake one is removed after invalidate success and when the mutation fails, the fake one is still showing
 
 return rollback function(remove fake data back) onMutate to solve these problems and get preview data with getQueryData and set it in rollback function and access and call rollback function in onSuccess/onError with third arguments
+
+41. Update issue status
+
+render status select and mutate on change. add optimistic update and rollback onError and invalidate onSettled

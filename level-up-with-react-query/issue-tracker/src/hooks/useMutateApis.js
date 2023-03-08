@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import fetchWithError from "../helpers/fetchWithError";
 
-export const addIssueMutate = () => {
+export const useAddIssue = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -22,4 +22,45 @@ export const addIssueMutate = () => {
     }
   );
   return addIssueMutate;
+};
+
+export const useUpdateStatus = () => {
+  const queryClient = useQueryClient();
+
+  const updateStatusMutate = useMutation(
+    ({ issueNumber, status }) => {
+      fetchWithError(`/api/issues/${issueNumber}`, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ status }),
+      });
+    },
+    {
+      onMutate: ({ issueNumber, status }) => {
+        const oldStatus = queryClient.getQueryData([
+          "issues",
+          issueNumber,
+        ]).status;
+        queryClient.setQueryData(["issues", issueNumber], (data) => ({
+          ...data,
+          status,
+        }));
+
+        return () => {
+          queryClient.setQueryData(["issues", issueNumber], (data) => ({
+            ...data,
+            status: oldStatus,
+          }));
+        };
+      },
+      onError: (data, variables, rollback) => {
+        rollback();
+      },
+      onSettled: (data, error, { issueNumber, status }) => {
+        queryClient.invalidateQueries(["issues", issueNumber], { exact: true });
+      },
+    }
+  );
+
+  return updateStatusMutate;
 };

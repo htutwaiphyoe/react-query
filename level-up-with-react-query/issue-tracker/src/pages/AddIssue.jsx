@@ -1,7 +1,7 @@
-import { addIssueMutate } from "../hooks/useMutateApis";
+import { useAddIssue } from "../hooks/useMutateApis";
 
 export default function AddIssue() {
-  const addIssue = addIssueMutate();
+  const addIssue = useAddIssue();
   return (
     <div className="add-issue">
       <h2>Add Issue</h2>

@@ -3,6 +3,7 @@ import { useIssue, useIssueComments } from "../hooks/useFetchApis";
 import Loader from "./Loader";
 import IssueHeader from "./IssueHeader";
 import Comment from "./Comment";
+import IssueStatus from "./IssueStatus";
 
 export default function IssueDetails() {
   const { number } = useParams();
@@ -26,7 +27,12 @@ export default function IssueDetails() {
                 ))
               )}
             </section>
-            <aside></aside>
+            <aside>
+              <IssueStatus
+                status={issueQuery.data.status}
+                issueNumber={issueQuery.data.number.toString()}
+              />
+            </aside>
           </main>
         </>
       )}
