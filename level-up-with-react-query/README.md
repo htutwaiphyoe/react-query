@@ -509,3 +509,8 @@ can also start pagination from middle so bidirectional infinite queries, to fetc
 https://codesandbox.io/s/k57wsr?file=%2FApp.js&from-sandpack=true
 
 use React.Fragment and give index as key for page and same query key for all pages
+
+49. Integrating infinite queries for comments
+
+add infinite queries for comments in issue details using InfiniteScroll component
+there is different cache between useQuery and useInfiniteQuery, use prefetchInfiniteQuery for infinite query

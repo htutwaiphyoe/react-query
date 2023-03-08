@@ -6,6 +6,7 @@ import Comment from "./Comment";
 import IssueStatus from "./IssueStatus";
 import IssueAssignee from "./IssueAssignee";
 import IssueLabels from "./IssueLabels";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function IssueDetails() {
   const { number } = useParams();
@@ -24,9 +25,18 @@ export default function IssueDetails() {
               {issueCommentsQuery.isLoading ? (
                 <Loader />
               ) : (
-                issueCommentsQuery.data?.map((comment) => (
-                  <Comment key={comment.id} {...comment} />
-                ))
+                <InfiniteScroll
+                  hasMore={issueCommentsQuery.hasNextPage}
+                  dataLength={issueCommentsQuery.data?.pages.length}
+                  next={issueCommentsQuery.fetchNextPage}
+                  loader={<Loader />}
+                >
+                  {issueCommentsQuery.data?.pages.map((page) =>
+                    page?.map((comment) => (
+                      <Comment key={comment.id} {...comment} />
+                    ))
+                  )}
+                </InfiniteScroll>
               )}
             </section>
             <aside>

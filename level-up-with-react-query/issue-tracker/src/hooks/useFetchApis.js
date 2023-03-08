@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
 import fetchWithError from "../helpers/fetchWithError";
 import { defaultLabels } from "../helpers/defaultData";
 
@@ -57,10 +57,18 @@ export function useIssue(issueNo) {
 }
 
 export function useIssueComments(issueNo) {
-  const issueCommentsQuery = useQuery(
+  const issueCommentsQuery = useInfiniteQuery(
     ["issues", issueNo, "comments"],
-    ({ signal }) =>
-      fetchWithError(`/api/issues/${issueNo}/comments`, { signal })
+    ({ signal, pageParam }) =>
+      fetchWithError(`/api/issues/${issueNo}/comments?page=${pageParam}`, {
+        signal,
+      }),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        if (lastPage.length === 0) return;
+        return allPages.length + 1;
+      },
+    }
   );
   return issueCommentsQuery;
 }
