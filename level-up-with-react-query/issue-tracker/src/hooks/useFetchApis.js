@@ -1,5 +1,6 @@
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
 import fetchWithError from "../helpers/fetchWithError";
+import { defaultLabels } from "../helpers/defaultData";
 
 export function useUser(userId) {
   const userQuery = useQuery(
@@ -10,19 +11,28 @@ export function useUser(userId) {
   return userQuery;
 }
 
-export function useIssueList({ labels, status }) {
+export function useIssueList({ labels, status, page }) {
+  const queryClient = useQueryClient();
   const issueListQuery = useQuery(
-    ["issues", { labels, status }],
+    ["issues", { labels, status, page }],
     async ({ signal }) => {
       const labelQueryString = labels
         .map((label) => `labels[]=${label}`)
         .join("&");
       const statusQueryString = status ? `&status=${status}` : "";
-      return fetchWithError(
-        `/api/issues?${labelQueryString}${statusQueryString}`,
+      const paginationQueryString = page ? `&page=${page}` : "";
+      const result = await fetchWithError(
+        `/api/issues?${labelQueryString}${statusQueryString}${paginationQueryString}`,
         { signal }
       );
-    }
+
+      result.forEach((issue) => {
+        queryClient.setQueryData(["issues", `${issue.number}`], issue);
+      });
+
+      return result;
+    },
+    { keepPreviousData: true }
   );
   return issueListQuery;
 }
@@ -33,6 +43,7 @@ export function useLabels() {
     ({ signal }) => fetchWithError("/api/labels", { signal }),
     {
       staleTime: 1000 * 60 * 60,
+      placeholderData: defaultLabels,
     }
   );
   return labelsQuery;
@@ -46,10 +57,18 @@ export function useIssue(issueNo) {
 }
 
 export function useIssueComments(issueNo) {
-  const issueCommentsQuery = useQuery(
+  const issueCommentsQuery = useInfiniteQuery(
     ["issues", issueNo, "comments"],
-    ({ signal }) =>
-      fetchWithError(`/api/issues/${issueNo}/comments`, { signal })
+    ({ signal, pageParam }) =>
+      fetchWithError(`/api/issues/${issueNo}/comments?page=${pageParam}`, {
+        signal,
+      }),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        if (lastPage.length === 0) return;
+        return allPages.length + 1;
+      },
+    }
   );
   return issueCommentsQuery;
 }
@@ -62,4 +81,11 @@ export function useSearchQuery(search) {
     { enabled: !!search }
   );
   return useSearchQuery;
+}
+
+export function useUsers() {
+  const useUsersQuery = useQuery(["users"], ({ signal }) =>
+    fetchWithError(`/api/users`, { signal })
+  );
+  return useUsersQuery;
 }
