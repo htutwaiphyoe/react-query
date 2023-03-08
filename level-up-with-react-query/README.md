@@ -475,7 +475,7 @@ query function can access query key
 
 previous button decrease page and disable when page is 1
 
-next button increase page and disable there is no more data
+next button increase page and disable there is no more data or less than perPage
 
 pagination methods =>  offset-based pagination (per_page * page), cursor-based pagination
 
@@ -484,3 +484,7 @@ to show previous data while loading, use keepPreviousData option
 user can press next button multiple times, to avoid disable with isPreviousData combine with keepPreviousData, isFetching will be disabled every background refetch
 
 can prefetch next page when hover next button or current page data is loaded with useEffect using page dependencies
+
+45. (PRACTICE) Paginated queries
+
+https://codesandbox.io/s/iisrg2?file=%2FApp.js&from-sandpack=true
