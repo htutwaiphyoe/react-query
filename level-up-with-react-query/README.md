@@ -555,3 +555,11 @@ useQuery<ReturnType, ErrorType, TransformationType, QueryKeyType>
 ReturnType for data, ErrorType for error, TransformationType for return data select function and QueryKeyType for query key. query key can use as const so that type will be tuple type, query key parameter type is passed to query key of query function
 
 don't destructure queryObject due to typescript to inference based program control flow
+
+56. React query testing
+
+use API mocking and make fake API calls, mocked response must same as actual response
+
+react query testing => run in component and render it and check output, JEST, JSDOM, React Test Renderer
+
+change default config for testing, retry false and remove error log in setLogger of react query, clean up query client in beforeEach
