@@ -503,3 +503,9 @@ refetching in infinite queries,refetching with original pageParam value can be p
 it also work with cursor based pagination
 
 can also start pagination from middle so bidirectional infinite queries, to fetch previous page, use fetchPreviousPage, getPreviousPageParam, hasPreviousPage and isFetchingPreviousPage. return pageParam from query function and use it in getPreviousPageParam callback
+
+48. (PRACTICE) Infinite queries
+
+https://codesandbox.io/s/k57wsr?file=%2FApp.js&from-sandpack=true
+
+use React.Fragment and give index as key for page and same query key for all pages
