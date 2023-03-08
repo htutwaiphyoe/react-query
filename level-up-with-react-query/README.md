@@ -492,3 +492,14 @@ https://codesandbox.io/s/iisrg2?file=%2FApp.js&from-sandpack=true
 46. Integrating pagination in issues
 
 reset pagination when filters change, pass page in filter object and create query string for page, render pagination buttons and show previous data while loading
+
+47. Infinite queries
+
+infinite page based on scroll or show more button, use useInfiniteQuery that take query kay and query function with pageParam parameter for pagination that pageParam comes from getNextPageParam callback which has last page of the list and all pages of the list and return data becomes value for pageParam of query function. for no next page, return undefined. Query returns data with pages and pageParams, pages contains arrays of all pages and params contains arrays of all page params. to load next page, use query.fetchNextPage function which calls getNextPageParam to get next pageParam and pass to query function and return result added in existing pages
+
+to check the last page, use hasNextPage, isFetchingNextPage for disable button
+
+refetching in infinite queries,refetching with original pageParam value can be problems like earlier records changes or wrong pageParams value due to data changed or duplicate or missing record. react query refetch one page at a time from page 1 to recent page and call getNextPageParam so that pageParam value is up to date
+it also work with cursor based pagination
+
+can also start pagination from middle so bidirectional infinite queries, to fetch previous page, use fetchPreviousPage, getPreviousPageParam, hasPreviousPage and isFetchingPreviousPage. return pageParam from query function and use it in getPreviousPageParam callback
